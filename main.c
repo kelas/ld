@@ -16,10 +16,8 @@ Zin _*aligned_malloc(U aln,U n){_*p;P(posix_memalign(&p,aln,n),(_*)0)R p;}
 S allocate_padded_buffer(U n,U pad){R(S)aligned_malloc(CACHE_LINE,n+pad);}
 U get_corpus(S filename,U pad,S*res){FILE*fp=fopen(filename, "rb");P(!fp,printf("!%s\n",filename),exit(1),0)
   fseek(fp,0,SEEK_END);U len=ftell(fp);S buf=allocate_padded_buffer(len,pad);
-  P(!buf,fclose(fp),printf("!oom"),exit(1),0)
-  rewind(fp);U readb=fread(buf,1,len,fp);fclose(fp);
-  P(readb!=len,free(buf),printf("!data"),exit(1),0)
-  R*res=buf,len+pad;}
+  P(!buf,fclose(fp),printf("!oom"),exit(1),0)rewind(fp);U readb=fread(buf,1,len,fp);fclose(fp);
+  P(readb!=len,free(buf),printf("!data"),exit(1),0)R*res=buf,len+pad;}
 
 int main(int argc,char*argv[]) {
   int c,verbose=0,dump=0,iterations=50;
@@ -30,12 +28,10 @@ int main(int argc,char*argv[]) {
   P(optind>=argc,printf("%s <csv>\n",argv[0]),exit(1),1)S filename=(S)argv[optind],p;
   U pn=get_corpus(filename,CPD,&p);
 
-  printf(
+  printf("\n"
    "file                       : %s\n"
    "size                       : %lld\n"
    "laps                       : %d\n", filename, pn, iterations);
-
-//#undef __linux__ //fixme
 
 #ifdef __linux__
   int evts[6] = { PERF_COUNT_HW_CPU_CYCLES, PERF_COUNT_HW_INSTRUCTIONS, PERF_COUNT_HW_BRANCH_MISSES,
@@ -50,7 +46,7 @@ int main(int argc,char*argv[]) {
   P(!pcsv.i,printf("!oom\n"), 1)
 
 #ifdef __linux__
-  TimingAccumulator(2, evts, 6);
+  perf_init(2, evts, 6);
 #endif // __linux__
 
   double total = 0; // naive accumulator
@@ -60,14 +56,14 @@ int main(int argc,char*argv[]) {
       clock_t start = clock(); // brutally portable
 
 #ifdef __linux__
-      start(0);
+      perf_start(0);
 #endif // __linux__
 
       csv((const unsigned char *)p, pn, &pcsv);
       //pcsv.indexes[pcsv.n++]=pn;  //clamp
 
 #ifdef __linux__
-      stop(0);
+      perf_stop(0);
       //}{TimingPhase p2(ta, 1);}
 #endif // __linux__
 
@@ -114,30 +110,29 @@ int main(int argc,char*argv[]) {
 
 #ifdef __linux__
   if(verbose) {
-    cout << "Number of cycles                   = " << ta.results[0] << endl;
-    cout << "Number of cycles per byte          = " << ta.results[0] / volume << endl;
-    cout << "Number of cycles (ref)             = " << ta.results[5] << endl;
-    cout << "Number of cycles (ref) per byte    = " << ta.results[5] / volume << endl;
-    cout << "Number of instructions             = " << ta.results[1] << endl;
-    cout << "Number of instructions per byte    = " << ta.results[1] / volume << endl;
-    cout << "Number of instructions per cycle   = " << double(ta.results[1]) / ta.results[0] << endl;
-    cout << "Number of branch misses            = " << ta.results[2] << endl;
-    cout << "Number of branch misses per byte   = " << ta.results[2] / volume << endl;
-    cout << "Number of cache references         = " << ta.results[3] << endl;
-    cout << "Number of cache references per b.  = " << ta.results[3] / volume << endl;
-    cout << "Number of cache misses             = " << ta.results[4] << endl;
-    cout << "Number of cache misses per byte    = " << ta.results[4] / volume << endl;
-    cout << "CPU freq (effective)               = " << ta.results[0] / time_in_s / (1000 * 1000 * 1000) << endl;
-    cout << "CPU freq (base)                    = " << ta.results[5] / time_in_s / (1000 * 1000 * 1000) << endl;
-  } else {
-    ta.dump();
-  }
-  printf("Cycles per byte %f\n", (1.0*ta.results[0])/volume);
+    printf("\ncycles                     : %lu\n",  results[0]);
+    printf("cycles/byte                : %.2f\n", results[0] / volume);
+    printf("instructions               : %lu\n",  results[1]);
+    printf("instructions/byte          : %.2f\n", results[1] / volume);
+    printf("instructions/cycle         : %.2f\n", (double)results[1] / results[0]);
+    printf("branch misses              : %lu\n",  results[2]);
+    printf("branch misses/byte         : %.2f\n", results[2] / volume);
+    printf("cache references           : %lu\n",  results[3]);
+    printf("cache references/byte      : %.2f\n", results[3] / volume);
+    printf("cache misses               : %lu\n",  results[4]);
+    printf("cache misses per byte      : %.2f\n", results[4] / volume);
+    printf("cpu freq (effective)       : %.2f\n", results[0] / time_in_s / (1000 * 1000 * 1000));
+  } else {}
+
+    printf("cycles/byte                : %.2f\n",  (1.0*results[0])/volume);
+
 #endif
 
-  printf("GB/s                       : %f\n", volume / time_in_s / (1024 * 1024 * 1024));
+    printf("\nGB/s                       : %f\n",  volume / time_in_s / (1024 * 1024 * 1024));
+    printf("\n");
 
   free(pcsv.i);
+  perf_shutdown();
 
   R 0;
 }
