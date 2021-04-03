@@ -29,9 +29,11 @@ int main(int argc,char*argv[]) {
   U pn=get_corpus(filename,CPD,&p);
 
   printf("\n"
+   "\n"
+   "host                       : %s\n"
    "file                       : %s\n"
    "size                       : %lld\n"
-   "laps                       : %d\n", filename, pn, iterations);
+   "laps                       : %d\n", UNAME, filename, pn, iterations);
 
 #ifdef __linux__
   int evts[6] = { PERF_COUNT_HW_CPU_CYCLES, PERF_COUNT_HW_INSTRUCTIONS, PERF_COUNT_HW_BRANCH_MISSES,
