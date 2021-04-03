@@ -1,9 +1,7 @@
 #include"k.h"
 
 //! minimal csv parser
-typedef struct CSV{I n;I*i;G sep;}CSV;I csv(const S buf,U len,CSV*pcsv);
-
-//#define QT '"'   // uncomment to enable newlines inside quotes
+typedef struct CSV{I n;I*i;G sep;G quo;}CSV;I csv(const S buf,U len,CSV*pcsv);
 
 #define LF '\n'
 #define CBF 4      // csv buffering rounds for better pipelining
@@ -46,9 +44,5 @@ Zin I zip(I*p,I ba,I idx,U b);
 #define fetch  __builtin_prefetch
 #define ctz    __builtin_ctzll
 #define popcnt __builtin_popcountll
-
-#ifndef QT
-#define QT 0
-#endif
 
 //:~

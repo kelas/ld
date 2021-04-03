@@ -18,11 +18,15 @@ U get_corpus(S filename,U pad,S*res){FILE*fp=fopen(filename, "rb");P(!fp,printf(
   P(!buf,fclose(fp),printf("!oom"),exit(1),0)rewind(fp);U readb=fread(buf,1,len,fp);fclose(fp);
   P(readb!=len,free(buf),printf("!data"),exit(1),0)R*res=buf,len+pad;}
 
-int main(int argc,char*argv[]) {
-  int c,verbose=0,dump=0,iterations=50;
+I csv_naive(const S s,U len,CSV*r){r->n=0;N(len,Z(s[i]==r->sep||s[i]=='\n',r->i[r->n++]=i);)R r->n;}
 
-  W((c=getopt(argc,argv,"vdi:s"))!=-1)
-   S(c,C('v',verbose=1)C('d',dump=1)C('i',iterations=atoi(optarg)))
+int main(int argc,char*argv[]) {
+  int c,verbose=0,dump=0,iterations=50,mode=0;
+
+  W((c=getopt(argc,argv,"vdm:i:s"))!=-1)
+   S(c,C('v',verbose=1)C('d',dump=1)C('i',iterations=atoi(optarg))C('m',mode=atoi(optarg)))
+
+  printf("mode %d\n",mode);
 
   P(optind>=argc,printf("%s <csv>\n",argv[0]),exit(1),1)S filename=(S)argv[optind],p;
   U pn=get_corpus(filename,CPD,&p);
@@ -32,7 +36,7 @@ int main(int argc,char*argv[]) {
    "file                       : %s\n"
    "size                       : %lld\n"
    "mode                       : %s\n"
-   "laps                       : %d\n", UNAME, filename, pn, QT?"quote":"noquote", iterations);
+   "laps                       : %d\n", UNAME, filename, pn, mode==2?"naive":mode==1?"quote":"noquote", iterations);
 
 #ifdef __linux__
   int evts[6] = { PERF_COUNT_HW_CPU_CYCLES, PERF_COUNT_HW_INSTRUCTIONS, PERF_COUNT_HW_BRANCH_MISSES,
@@ -42,7 +46,8 @@ int main(int argc,char*argv[]) {
   CSV pcsv;
   pcsv.n   =  0;
   pcsv.sep = '|';
-  pcsv.i   = calloc(sizeof(int),pn/5);
+  pcsv.quo = !!(mode==1);
+  pcsv.i   = calloc(sizeof(int),pn);
 
   P(!pcsv.i,printf("!oom\n"), 1)
 
@@ -60,7 +65,10 @@ int main(int argc,char*argv[]) {
       perf_start(0);
 #endif // __linux__
 
-      csv((const unsigned char *)p, pn, &pcsv);
+      if(2>mode)
+        csv((const unsigned char *)p, pn, &pcsv);
+      else
+        csv_naive((const unsigned char *)p, pn, &pcsv);
       //pcsv.indexes[pcsv.n++]=pn;  //clamp
 
 #ifdef __linux__
@@ -83,8 +91,10 @@ int main(int argc,char*argv[]) {
 
 #ifdef CNT
       if(!((ctr)%5)){
-        if(parse_number((const char*)p+pcsv.i[i]+1,&t)){sum+=t;}
-        //sum+=strtod(p+pcsv.indexes[i]+1,0);
+        if(2>mode){
+          if(parse_number((const char*)p+pcsv.i[i]+1,&t)){sum+=t;}
+        }else
+          sum+=strtod(p+pcsv.i[i]+1,0);
       }
 #endif
 

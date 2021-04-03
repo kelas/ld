@@ -14,8 +14,10 @@ C=clang $O $W $F -DUNAME="\"$U\""
 
 all: $T *.c *.h
 	@$C *.c -o$o
-	./$o -i100 -v taq100m.csv
-	@$C *.c -o$o -DQT="'\"'"
-	./$o -i100 -v taq100m.csv
+	./$o -i50 -m0 -v $T
+	./$o -i50 -m1 -v $T
+	./$o -i50 -m2 -v $T
+
+
 $T:
 	gunzip -k $T.gz
