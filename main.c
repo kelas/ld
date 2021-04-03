@@ -26,8 +26,6 @@ int main(int argc,char*argv[]) {
   W((c=getopt(argc,argv,"vdm:i:s"))!=-1)
    S(c,C('v',verbose=1)C('d',dump=1)C('i',iterations=atoi(optarg))C('m',mode=atoi(optarg)))
 
-  printf("mode %d\n",mode);
-
   P(optind>=argc,printf("%s <csv>\n",argv[0]),exit(1),1)S filename=(S)argv[optind],p;
   U pn=get_corpus(filename,CPD,&p);
 
