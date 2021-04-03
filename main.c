@@ -30,11 +30,11 @@ int main(int argc,char*argv[]) {
   U pn=get_corpus(filename,CPD,&p);
 
   printf("\n"
-   "host                       : %s\n"
+   //"host                       : %s\n"
    "file                       : %s\n"
    "size                       : %lld\n"
    "mode                       : %s\n"
-   "laps                       : %d\n", UNAME, filename, pn, mode==2?"naive":mode==1?"quote":"noquote", iterations);
+   "laps                       : %d\n", filename, pn, mode==2?"naive":mode==1?"quote":"noquote", iterations);
 
 #ifdef __linux__
   int evts[6] = { PERF_COUNT_HW_CPU_CYCLES, PERF_COUNT_HW_INSTRUCTIONS, PERF_COUNT_HW_BRANCH_MISSES,

@@ -2,7 +2,7 @@ ifneq ($(shell uname -m),aarch64)
  A=-march=native
 endif
 
-U=`uname -rsm`
+#U=`uname -rsm`
 
 CC=clang
 #CC=gcc
@@ -14,7 +14,8 @@ F=-fno-common -fno-stack-protector -fno-asynchronous-unwind-tables
 N=-Wno-unused-function -Wno-unused-value -Wno-unused-variable \
 	-Wno-unused-command-line-argument -Wno-discarded-qualifiers -Wno-unknown-warning-option
 W=-Wall -Werror -Wno-incompatible-pointer-types -Wno-pointer-sign $N
-C=$(CC) $O $W $F -DUNAME="\"$U\""
+C=$(CC) $O $W $F
+#-DUNAME="\"$U\""
 
 all: $T *.c *.h
 	$C *.c -o$o
