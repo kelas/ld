@@ -76,7 +76,7 @@ really_inline uint64_t Emulate64x64to128(uint64_t*r_hi, const uint64_t x, const 
 }
 */
 
-really_inline value128 full_multiplication(uint64_t value1, uint64_t value2) {
+value128 full_multiplication(uint64_t value1, uint64_t value2) {
   value128 answer;
 
 #ifdef _M_ARM64
