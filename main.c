@@ -134,7 +134,10 @@ int main(int argc,char*argv[]) {
     printf("\n");
 
   free(pcsv.i);
+
+#ifdef __linux__
   perf_shutdown();
+#endif
 
   R 0;
 }
