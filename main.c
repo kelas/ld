@@ -32,7 +32,7 @@ int main(int argc,char*argv[]) {
    "file                       : %s\n"
    "size                       : %lld\n"
    "mode                       : %s\n"
-   "laps                       : %d\n", UNAME, filename, pn, QT?"quotes":"noquotes", iterations);
+   "laps                       : %d\n", UNAME, filename, pn, QT?"quote":"noquote", iterations);
 
 #ifdef __linux__
   int evts[6] = { PERF_COUNT_HW_CPU_CYCLES, PERF_COUNT_HW_INSTRUCTIONS, PERF_COUNT_HW_BRANCH_MISSES,
