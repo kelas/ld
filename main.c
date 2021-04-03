@@ -101,7 +101,7 @@ int main(int argc,char*argv[]) {
       if(dump)printf("\n");
     }
   }
-  F sum_time = clock()-start; // brutally portable
+  F sum_time = clock()-start;
   F time_in_s = sum_time/CLOCKS_PER_SEC;
   printf("control sum                : %f (err %f)\n", sum, sum-350404138.448127);
   printf("parse_double (s)           : %0.2f\n", time_in_s);
