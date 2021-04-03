@@ -1,3 +1,5 @@
+//! fast double parser in c, original copyright (c) 2020 lemire, apache 2.0
+
 #ifndef FAST_DOUBLE_PARSER_H
 #define FAST_DOUBLE_PARSER_H
 

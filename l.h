@@ -1,8 +1,9 @@
+//! fast csv parser avx/neon, copyright (c) 2020 regents of kparc, bsd-2-clause
 #include"k.h"
 
-//! minimal csv parser
 typedef struct CSV{I n;I*i;G sep;G quo;}CSV;I csv(const S buf,U len,CSV*pcsv);
 
+#define QT '"'
 #define LF '\n'
 #define CBF 4      // csv buffering rounds for better pipelining
 

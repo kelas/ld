@@ -6,4 +6,5 @@ typedef unsigned long long U;typedef unsigned char G,*S;typedef unsigned int I;t
 #define C(i,a...)   case i:{a;}break;
 #define S(i,c,a...) switch(i){c default:a;}
 #define R return
+
 //:~

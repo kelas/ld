@@ -1,3 +1,4 @@
+//! csv(), copyright (c) 2020 regents of kparc, bsd-2-clause
 #include"l.h"
 #define SHR(m) m^=*in_q,*in_q=((J)(m))>>63,m // assume shr(J) well-defined
 #ifdef __ARM_NEON

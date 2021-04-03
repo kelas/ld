@@ -1,11 +1,11 @@
-#include<unistd.h> //getopt
-#include<stdlib.h> //atoi
-#include<stdio.h> //atoi
+//! avxneon csv parser benchmark, copyright (c) 2020 regents of kparc, bsd-2-clause
+#include<unistd.h>  // getopt
+#include<stdlib.h>  // atoi
+#include<stdio.h>   // printf
 #include<time.h>
 
-#define CPD 128 // padding (the input buf should be readable up to buf + CPD)
+#define CPD       128 // padding (the input buf should be readable up to buf + CPD)
 #define CACHE_LINE 64
-#define CNT
 
 #include"f.h"
 #include"l.h"
@@ -87,14 +87,12 @@ int main(int argc,char*argv[]) {
           if(dump)printf("%c",p[j+1]);
       }
 
-#ifdef CNT
       if(!((ctr)%5)){
         if(2>mode){
-          if(parse_number((const char*)p+pcsv.i[i]+1,&t)){sum+=t;}
+          if(parse_number((const char*)p+pcsv.i[i]+1,&t)){sum+=t;} //lemire's fast_double_parser
         }else
-          sum+=strtod(p+pcsv.i[i]+1,0);
+          sum+=strtod(p+pcsv.i[i]+1,0); // stock strtoad
       }
-#endif
 
       if(dump)printf("\n");
     }
@@ -147,7 +145,6 @@ int main(int argc,char*argv[]) {
   perf_shutdown();
 #endif
 
-  R 0;
-}
+  R 0;}
 
 //:~
