@@ -29,7 +29,6 @@ int main(int argc,char*argv[]) {
   U pn=get_corpus(filename,CPD,&p);
 
   printf("\n"
-   "\n"
    "host                       : %s\n"
    "file                       : %s\n"
    "size                       : %lld\n"
@@ -112,7 +111,8 @@ int main(int argc,char*argv[]) {
 
 #ifdef __linux__
   if(verbose) {
-    printf("\ncycles                     : %lu\n",  results[0]);
+    printf("\n");
+    printf("cycles                     : %lu\n",  results[0]);
     printf("cycles/byte                : %.2f\n", results[0] / volume);
     printf("instructions               : %lu\n",  results[1]);
     printf("instructions/byte          : %.2f\n", results[1] / volume);
