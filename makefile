@@ -13,8 +13,9 @@ W=-Wall -Werror -ferror-limit=1 -Wno-incompatible-pointer-types -Wno-pointer-sig
 C=clang $O $W $F -DUNAME="\"$U\""
 
 all: $T *.c *.h
-	$C *.c -o$o
-	@./$o -v taq100m.csv
-
+	@$C *.c -o$o
+	./$o -i100 -v taq100m.csv
+	@$C *.c -o$o -DQT="'\"'"
+	./$o -i100 -v taq100m.csv
 $T:
 	gunzip -k $T.gz

@@ -11,7 +11,6 @@
 #include"l.h"
 #include"t.h"
 
-// we could do a simple malloc R(S)malloc(len+pad), but we want to align to cache line
 Zin _*aligned_malloc(U aln,U n){_*p;P(posix_memalign(&p,aln,n),(_*)0)R p;}
 S allocate_padded_buffer(U n,U pad){R(S)aligned_malloc(CACHE_LINE,n+pad);}
 U get_corpus(S filename,U pad,S*res){FILE*fp=fopen(filename, "rb");P(!fp,printf("!%s\n",filename),exit(1),0)
@@ -32,7 +31,8 @@ int main(int argc,char*argv[]) {
    "host                       : %s\n"
    "file                       : %s\n"
    "size                       : %lld\n"
-   "laps                       : %d\n", UNAME, filename, pn, iterations);
+   "mode                       : %s\n"
+   "laps                       : %d\n", UNAME, filename, pn, QT?"quotes":"noquotes", iterations);
 
 #ifdef __linux__
   int evts[6] = { PERF_COUNT_HW_CPU_CYCLES, PERF_COUNT_HW_INSTRUCTIONS, PERF_COUNT_HW_BRANCH_MISSES,
@@ -42,7 +42,7 @@ int main(int argc,char*argv[]) {
   CSV pcsv;
   pcsv.n   =  0;
   pcsv.sep = '|';
-  pcsv.i   = calloc(1,pn*4); // can't have more indexes than we have data
+  pcsv.i   = calloc(sizeof(int),pn/5);
 
   P(!pcsv.i,printf("!oom\n"), 1)
 
@@ -50,11 +50,11 @@ int main(int argc,char*argv[]) {
   perf_init(2, evts, 6);
 #endif // __linux__
 
-  double total = 0; // naive accumulator
+  double total = 0;
   double sum,t = 0;
 
   U i;for(i=0;i<iterations;i++){
-      clock_t start = clock(); // brutally portable
+      clock_t start = clock();
 
 #ifdef __linux__
       perf_start(0);
@@ -68,10 +68,10 @@ int main(int argc,char*argv[]) {
       //}{TimingPhase p2(ta, 1);}
 #endif // __linux__
 
-      total += clock() - start; // brutally portable
+      total += clock() - start;
   }
 
-  clock_t start = clock(); // brutally portable
+  clock_t start = clock();
   sum=0;int ctr=1;
   for(i=0;i<pcsv.n;i++){
     if(dump)printf("idx %d -> %d: ",ctr, pcsv.i[i]);
@@ -94,18 +94,18 @@ int main(int argc,char*argv[]) {
   F sum_time = clock()-start; // brutally portable
   F time_in_s = sum_time/CLOCKS_PER_SEC;
   printf("control sum                : %f (err %f)\n", sum, sum-350404138.448127);
-  printf("parse_double (s)           : %f\n", time_in_s);
+  printf("parse_double (s)           : %0.2f\n", time_in_s);
 
   if(verbose) {
     printf("indices                    : %d\n", pcsv.n);
-    printf("bytes / index              : %f\n", pn/(F)pcsv.n);
+    printf("bytes / index              : %0.2f\n", pn/(F)pcsv.n);
   }
 
   F volume = iterations * pn;
   time_in_s = total/CLOCKS_PER_SEC;
 
   if(verbose) {
-    printf("total time (s)             : %f\n", time_in_s);
+    printf("total time (s)             : %0.2f\n", time_in_s);
     //O("number of iterations       : %llu\n", (uint64_t)volume);
   }
 
@@ -130,7 +130,7 @@ int main(int argc,char*argv[]) {
 
 #endif
 
-    printf("\nGB/s                       : %f\n",  volume / time_in_s / (1024 * 1024 * 1024));
+    printf("GB/s                       : %.2f\n",  volume / time_in_s / (1024 * 1024 * 1024));
     printf("\n");
 
   free(pcsv.i);
