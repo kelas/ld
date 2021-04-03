@@ -14,10 +14,9 @@ C=clang $O $W $F -DUNAME="\"$U\""
 
 all: $T *.c *.h
 	@$C *.c -o$o
-	./$o -i50 -m0 -v $T
-	./$o -i50 -m1 -v $T
-	./$o -i50 -m2 -v $T
-
+	./$o -i50 -m2 -v $T  # naiveloop
+	./$o -i50 -m1 -v $T  # quotes
+	./$o -i50 -m0 -v $T  # noquotes
 
 $T:
 	gunzip -k $T.gz
