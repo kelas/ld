@@ -1,4 +1,4 @@
-//! fast csv parser avx/neon, copyright (c) 2020 regents of kparc, bsd-2-clause
+//! ld() fast csv tokenizer, copyright (c) 2020 regents of kparc, bsd-2-clause
 #include"k.h"
 typedef struct CSV{U n;I*i;G sep;G quo;}CSV;U ld(const S buf,U len,CSV*pcsv);U ld_naive(const S s,U n,CSV*r);
 

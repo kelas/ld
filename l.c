@@ -1,4 +1,4 @@
-//! ld(), copyright (c) 2021 regents of kparc, bsd-2-clause
+//! ld() fast csv tokenizer, copyright (c) 2021 regents of kparc, bsd-2-clause
 #include"l.h"
 #define SHR(m) m^=*in_q,*in_q=((J)(m))>>63,m // assumes shr(J) well-defined
 #ifdef __ARM_NEON
