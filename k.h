@@ -18,5 +18,6 @@ typedef unsigned long long U;typedef unsigned char G,*S,VA V;typedef int I;typed
 #define ZF static F
 #define ZV static _
 
+#define IN(l,x,r)         ((l)<=(x)&&(x)<=(r))
 
 //:~
