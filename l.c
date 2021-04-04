@@ -1,5 +1,4 @@
 //! ld(), copyright (c) 2021 regents of kparc, bsd-2-clause
-
 #include"l.h"
 #define SHR(m) m^=*in_q,*in_q=((J)(m))>>63,m // assumes shr(J) well-defined
 #ifdef __ARM_NEON
@@ -7,7 +6,7 @@ Zin U cmi(span z,G m){vec vm=vset1(m);R mmask(cmpeq(z.i0,vm),cmpeq(z.i1,vm),cmpe
 Zin U fqm(span x,U*in_q){U qbts=cmi(x,'"');U m=vmull(-1ULL,qbts);R SHR(m);}
 #else
 Zin U cmi(span z,G m){vec b=vset1(m);U x=(I)mmask(cmpeq(b,z.l)),y=mmask(cmpeq(b,z.h));R(y<<32)|x;}
-Zin U fqm(span x,U*in_q){U qbts=cmi(x,'"');U m=vmull(aV(0,qbts),aV(0xFF),0)[0];R SHR(m);}
+Zin U fqm(span x,U*in_q){U qbts=cmi(x,'"');U m=vmull(aV(qbts,0),aV(-1ULL),0)[0];R SHR(m);}
 #endif
 #define z(i) p[ba+i]=idx+_(ctzll)(b),b=b&(b-1);
 Zin I zip(I*p,I ba,I idx,U b){P(!b,ba)I n=_(popcountll)(b),nxb=ba+n;N(8,z(i))Z(n>8,N(8,z(i+8)));Z(n>16,ba+=16;do{z(0)ba++;}W(b));R nxb;}

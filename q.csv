@@ -1,4 +1,5 @@
 123|"asdf
 qwer"|123.123
 456|"zxcv vbnm"|456.456
-789|"asdf""ghjk"|789.789
+789|"asdf" "ghjk"|789.789
+789|"asdf|ghjk"|789.789
