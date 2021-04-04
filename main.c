@@ -18,8 +18,6 @@ U get_corpus(S filename,U pad,S*res){FILE*fp=fopen(filename, "rb");P(!fp,printf(
   P(!buf,fclose(fp),printf("!oom"),exit(1),0)rewind(fp);U readb=fread(buf,1,len,fp);fclose(fp);
   P(readb!=len,free(buf),printf("!data"),exit(1),0)R*res=buf,len+pad;}
 
-I csv_naive(const S s,U len,CSV*r){r->n=0;N(len,Z(s[i]==r->sep||s[i]=='\n',r->i[r->n++]=i);)R r->n;}
-
 int main(int argc,char*argv[]) {
   int c,verbose=0,dump=0,iterations=50,mode=0;
 
@@ -64,9 +62,9 @@ int main(int argc,char*argv[]) {
 #endif // __linux__
 
       if(2>mode)
-        csv((const unsigned char *)p, pn, &pcsv);
+        ld((const unsigned char *)p, pn, &pcsv);
       else
-        csv_naive((const unsigned char *)p, pn, &pcsv);
+        ld_naive((const unsigned char *)p, pn, &pcsv);
       //pcsv.indexes[pcsv.n++]=pn;  //clamp
 
 #ifdef __linux__
@@ -103,7 +101,7 @@ int main(int argc,char*argv[]) {
   printf("parse_double (s)           : %0.2f\n", time_in_s);
 
   if(verbose) {
-    printf("indices                    : %d\n", pcsv.n);
+    printf("indices                    : %llu\n", pcsv.n);
     printf("bytes / index              : %0.2f\n", pn/(F)pcsv.n);
   }
 

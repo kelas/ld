@@ -19,9 +19,11 @@ C=$(CC) $O $W $F
 
 all: $T *.c *.h
 	$C *.c -o$o
-	#./$o -vi50 -m2 $T  # naive c loop
-	./$o -vi50 -m1 $T  # parse quotes (avx|neon)
-	#./$o -vi10 -m0 $T  # skip quotes (avx|neon)
+	#./$o -vi50 -m2 $T  # naive scalar loop
+	#./$o -vi50 -m1 $T  # parse quotes (vec)
+	#./$o -vi10 -m0 $T  # skip quotes (vec)
+	./$o -d -i1 -m1 q.csv  # validate quotes (vect)
+	./$o -d -i1 -m2 q.csv  # validate quotes (naive)
 
 $T:
 	gunzip -k $T.gz
