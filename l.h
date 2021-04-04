@@ -36,7 +36,7 @@ Zin U cmi(span in,G m);
 Zin U fqm(span x,U*in_q);
 // flatten values in 'b' assuming that they have values of idx plus their position in the bitvector, and store these indexes at p[ba]
 // incrementing ba as we go. we potentially store extra values beyond end of valid bits, so p needs to be large enough to handle this.
-Zin I zip(I*p,I ba,I idx,U b);
+Zin UI zip(UI*p,UI ba,UI idx,U b);
 //Z_ OB(const U n){N(64,putchar((n&(1LL<<i))?'1':'0'))}
 
 //:~

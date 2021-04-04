@@ -19,7 +19,7 @@ C=$(CC) $O $W $F
 
 all: $T *.c *.h
 	$C *.c -o$o
-	./$o -vi10 -m2 $T  # naive scalar loop
+	./$o -vi50 -m2 $T  # naive scalar loop
 	./$o -vi50 -m1 $T  # vec parse quotes
 	./$o -vi50 -m0 $T  # vec skip quotes
 	@#./$o -d -i1 -m1 q.csv  # validate quotes (vect)
