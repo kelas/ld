@@ -6,12 +6,6 @@
 #include<math.h>     //isfinite
 #include<string.h>   //memcpy
 #include<stdint.h>   //uint64_t
-#include <locale.h>
-#if __has_include(<xlocale.h>)
-#include <xlocale.h>
-#else
-#include <features.h>
-#endif // __has_include
 
 /**
  * The smallest non-zero float (binary64) is 2^−1074.
@@ -337,12 +331,7 @@ static locale_t c_locale;
 
 static const char * parse_float_strtod(const char *ptr, double *outDouble) {
   char *endptr;
-#ifndef __ARM_NEON
-   c_locale = newlocale(LC_ALL_MASK, "C", NULL);
-   *outDouble = strtod_l(ptr, &endptr, c_locale);
-#else
   *outDouble = strtod(ptr, &endptr);
-#endif
   // Some libraries will set errno = ERANGE when the value is subnormal,
   // yet we may want to be able to parse subnormal values.
   // However, we do not want to tolerate NAN or infinite values.
