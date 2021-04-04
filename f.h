@@ -30,7 +30,7 @@
 
 #define unlikely(x) __builtin_expect(!!(x), 0)
 
-typedef struct value128 {U low;U high;}value128;
+typedef struct value128{U low;U high;}value128;
 
 #if !defined(_M_X64) && !defined(_M_ARM64)// _umul128 for x86, arm
 // this is a slow emulation routine for 32-bit Windows
