@@ -19,9 +19,9 @@ C=$(CC) $O $W $F
 
 all: $T *.c *.h
 	$C *.c -o$o
-	./$o -vi50 -m2 $T  # naive loop
-	./$o -vi50 -m1 $T  # parse quotes
-	./$o -vi50 -m0 $T  # skip quotes
+	./$o -vi50 -m2 $T  # naive c loop
+	./$o -vi50 -m1 $T  # parse quotes (avx|neon)
+	./$o -vi50 -m0 $T  # skip quotes (avx|neon)
 
 $T:
 	gunzip -k $T.gz
