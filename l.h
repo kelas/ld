@@ -6,17 +6,17 @@ typedef struct CSV{U n;I*i;G sep;G quo;}CSV;U ld(const S buf,U len,CSV*pcsv);U l
 #include<x86intrin.h>
 #define aV(a...) ((v128){a})
 typedef __m256i vec;typedef __m128i v128;typedef struct span{vec l;vec h;}span;
-#define vld(p)(span){loadu(p),loadu(p+32)}
+#define vld(p)(span){vload(p),vload(p+32)}
 #define mmask _mm256_movemask_epi8
-#define loadu _mm256_loadu_si256
+#define vload _mm256_load_si256
 #define cmpeq _mm256_cmpeq_epi8
 #define vset1 _mm256_set1_epi8
 #define vmull _mm_clmulepi64_si128
 #else
 #include<arm_neon.h>
 typedef uint8x16_t vec;typedef struct span{vec i0;vec i1;vec i2;vec i3;}span;
-#define vld(p)(span){loadu(p),loadu(p+16),loadu(p+32),loadu(p+48)}
-#define loadu vld1q_u8
+#define vld(p)(span){vload(p),vload(p+16),vload(p+32),vload(p+48)}
+#define vload vld1q_u8
 #define cmpeq vceqq_u8
 #define vset1 vmovq_n_u8
 #define vmull vmull_p64

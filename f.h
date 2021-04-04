@@ -327,7 +327,7 @@ really_inline static double compute_float_64(int64_t power, uint64_t i, int nega
   return d;
 }
 // Return the null pointer on error
-static locale_t c_locale;
+//static locale_t c_locale;
 
 static const char * parse_float_strtod(const char *ptr, double *outDouble) {
   char *endptr;
