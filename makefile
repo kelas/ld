@@ -3,12 +3,12 @@ ifneq ($(shell uname -m),aarch64)
 endif
 
 CC=clang
-#CC=gcc
+#CC=/usr/local/Cellar/gcc/10.2.0_4/bin/gcc-10
 
 o=l
 T=taq100m.csv
 O=-O3 $A
-F=-fno-common -fno-stack-protector -fno-asynchronous-unwind-tables -fdeclspec
+F=-fno-common -fno-stack-protector -fno-asynchronous-unwind-tables
 N=-Wno-unused-function -Wno-unused-value -Wno-unused-variable \
 	-Wno-unused-command-line-argument -Wno-discarded-qualifiers -Wno-unknown-warning-option
 W=-Wall -Werror -Wno-incompatible-pointer-types -Wno-pointer-sign $N
@@ -32,12 +32,12 @@ test: *.c *.h
 unroll:
 	$C -g *.c -o$o -DUNROLL -DNOINLINE
 	objdump --disassemble-functions=_zip $o > zip.UNROLL
-	./$o -vi10 -m0 $T
+	./$o -vi30 -m0 $T
 
 nounroll:
 	$C  -g *.c -o$o -UUNROLL -DNOINLINE
 	objdump --disassemble-functions=_zip $o > zip.NOUNROLL
-	./$o -vi10 -m0 $T
+	./$o -vi30 -m0 $T
 
 $T:
 	gunzip -k $T.gz
