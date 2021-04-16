@@ -1,0 +1,113 @@
+
+l:	file format Mach-O 64-bit x86-64
+
+
+Disassembly of section __TEXT,__text:
+
+00000001000044b0 _zip:
+1000044b0: 55                          	pushq	%rbp
+1000044b1: 48 89 e5                    	movq	%rsp, %rbp
+1000044b4: 89 f0                       	movl	%esi, %eax
+1000044b6: 48 85 c9                    	testq	%rcx, %rcx
+1000044b9: 0f 84 6e 01 00 00           	je	366 <_zip+0x17d>
+1000044bf: f3 4c 0f b8 c1              	popcntq	%rcx, %r8
+1000044c4: 41 89 c2                    	movl	%eax, %r10d
+1000044c7: 31 f6                       	xorl	%esi, %esi
+1000044c9: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+1000044ce: 01 d6                       	addl	%edx, %esi
+1000044d0: 42 89 34 97                 	movl	%esi, (%rdi,%r10,4)
+1000044d4: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+1000044d9: 31 f6                       	xorl	%esi, %esi
+1000044db: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+1000044e0: 01 d6                       	addl	%edx, %esi
+1000044e2: 42 89 74 97 04              	movl	%esi, 4(%rdi,%r10,4)
+1000044e7: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+1000044ec: 31 f6                       	xorl	%esi, %esi
+1000044ee: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+1000044f3: 01 d6                       	addl	%edx, %esi
+1000044f5: 42 89 74 97 08              	movl	%esi, 8(%rdi,%r10,4)
+1000044fa: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+1000044ff: 31 f6                       	xorl	%esi, %esi
+100004501: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+100004506: 01 d6                       	addl	%edx, %esi
+100004508: 42 89 74 97 0c              	movl	%esi, 12(%rdi,%r10,4)
+10000450d: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+100004512: 31 f6                       	xorl	%esi, %esi
+100004514: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+100004519: 01 d6                       	addl	%edx, %esi
+10000451b: 42 89 74 97 10              	movl	%esi, 16(%rdi,%r10,4)
+100004520: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+100004525: 31 f6                       	xorl	%esi, %esi
+100004527: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+10000452c: 01 d6                       	addl	%edx, %esi
+10000452e: 42 89 74 97 14              	movl	%esi, 20(%rdi,%r10,4)
+100004533: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+100004538: 31 f6                       	xorl	%esi, %esi
+10000453a: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+10000453f: 01 d6                       	addl	%edx, %esi
+100004541: 42 89 74 97 18              	movl	%esi, 24(%rdi,%r10,4)
+100004546: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+10000454b: 31 f6                       	xorl	%esi, %esi
+10000454d: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+100004552: 01 d6                       	addl	%edx, %esi
+100004554: 42 89 74 97 1c              	movl	%esi, 28(%rdi,%r10,4)
+100004559: 45 8d 0c 00                 	leal	(%r8,%rax), %r9d
+10000455d: 41 83 f8 09                 	cmpl	$9, %r8d
+100004561: 0f 82 c3 00 00 00           	jb	195 <_zip+0x17a>
+100004567: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+10000456c: 31 f6                       	xorl	%esi, %esi
+10000456e: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+100004573: 01 d6                       	addl	%edx, %esi
+100004575: 42 89 74 97 20              	movl	%esi, 32(%rdi,%r10,4)
+10000457a: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+10000457f: 31 f6                       	xorl	%esi, %esi
+100004581: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+100004586: 01 d6                       	addl	%edx, %esi
+100004588: 42 89 74 97 24              	movl	%esi, 36(%rdi,%r10,4)
+10000458d: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+100004592: 31 f6                       	xorl	%esi, %esi
+100004594: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+100004599: 01 d6                       	addl	%edx, %esi
+10000459b: 42 89 74 97 28              	movl	%esi, 40(%rdi,%r10,4)
+1000045a0: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+1000045a5: 31 f6                       	xorl	%esi, %esi
+1000045a7: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+1000045ac: 01 d6                       	addl	%edx, %esi
+1000045ae: 42 89 74 97 2c              	movl	%esi, 44(%rdi,%r10,4)
+1000045b3: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+1000045b8: 31 f6                       	xorl	%esi, %esi
+1000045ba: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+1000045bf: 01 d6                       	addl	%edx, %esi
+1000045c1: 42 89 74 97 30              	movl	%esi, 48(%rdi,%r10,4)
+1000045c6: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+1000045cb: 31 f6                       	xorl	%esi, %esi
+1000045cd: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+1000045d2: 01 d6                       	addl	%edx, %esi
+1000045d4: 42 89 74 97 34              	movl	%esi, 52(%rdi,%r10,4)
+1000045d9: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+1000045de: 31 f6                       	xorl	%esi, %esi
+1000045e0: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+1000045e5: 01 d6                       	addl	%edx, %esi
+1000045e7: 42 89 74 97 38              	movl	%esi, 56(%rdi,%r10,4)
+1000045ec: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+1000045f1: 31 f6                       	xorl	%esi, %esi
+1000045f3: f3 48 0f bc f1              	tzcntq	%rcx, %rsi
+1000045f8: 01 d6                       	addl	%edx, %esi
+1000045fa: 42 89 74 97 3c              	movl	%esi, 60(%rdi,%r10,4)
+1000045ff: 41 83 f8 11                 	cmpl	$17, %r8d
+100004603: 72 25                       	jb	37 <_zip+0x17a>
+100004605: c4 e2 c8 f3 c9              	blsrq	%rcx, %rsi
+10000460a: 83 c0 10                    	addl	$16, %eax
+10000460d: 0f 1f 00                    	nopl	(%rax)
+100004610: 45 31 c0                    	xorl	%r8d, %r8d
+100004613: f3 4c 0f bc c6              	tzcntq	%rsi, %r8
+100004618: 41 01 d0                    	addl	%edx, %r8d
+10000461b: 89 c1                       	movl	%eax, %ecx
+10000461d: 44 89 04 8f                 	movl	%r8d, (%rdi,%rcx,4)
+100004621: ff c0                       	incl	%eax
+100004623: c4 e2 c8 f3 ce              	blsrq	%rsi, %rsi
+100004628: 75 e6                       	jne	-26 <_zip+0x160>
+10000462a: 44 89 c8                    	movl	%r9d, %eax
+10000462d: 5d                          	popq	%rbp
+10000462e: c3                          	retq
+10000462f: 90                          	nop

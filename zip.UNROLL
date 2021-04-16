@@ -1,0 +1,127 @@
+
+l:	file format Mach-O 64-bit x86-64
+
+
+Disassembly of section __TEXT,__text:
+
+00000001000044a0 _zip:
+1000044a0: 55                          	pushq	%rbp
+1000044a1: 48 89 e5                    	movq	%rsp, %rbp
+1000044a4: 89 f0                       	movl	%esi, %eax
+1000044a6: 48 85 c9                    	testq	%rcx, %rcx
+1000044a9: 0f 84 7e 01 00 00           	je	382 <_zip+0x18d>
+1000044af: f3 4c 0f b8 c9              	popcntq	%rcx, %r9
+1000044b4: 45 8d 04 01                 	leal	(%r9,%rax), %r8d
+1000044b8: f3 4c 0f bc d1              	tzcntq	%rcx, %r10
+1000044bd: 41 01 d2                    	addl	%edx, %r10d
+1000044c0: 89 c6                       	movl	%eax, %esi
+1000044c2: 44 89 14 b7                 	movl	%r10d, (%rdi,%rsi,4)
+1000044c6: c4 e2 a8 f3 c9              	blsrq	%rcx, %r10
+1000044cb: 31 f6                       	xorl	%esi, %esi
+1000044cd: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+1000044d2: 01 d6                       	addl	%edx, %esi
+1000044d4: 8d 48 01                    	leal	1(%rax), %ecx
+1000044d7: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+1000044da: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+1000044df: 31 f6                       	xorl	%esi, %esi
+1000044e1: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+1000044e6: 01 d6                       	addl	%edx, %esi
+1000044e8: 8d 48 02                    	leal	2(%rax), %ecx
+1000044eb: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+1000044ee: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+1000044f3: 31 f6                       	xorl	%esi, %esi
+1000044f5: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+1000044fa: 01 d6                       	addl	%edx, %esi
+1000044fc: 8d 48 03                    	leal	3(%rax), %ecx
+1000044ff: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+100004502: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+100004507: 31 f6                       	xorl	%esi, %esi
+100004509: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+10000450e: 01 d6                       	addl	%edx, %esi
+100004510: 8d 48 04                    	leal	4(%rax), %ecx
+100004513: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+100004516: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+10000451b: 31 f6                       	xorl	%esi, %esi
+10000451d: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+100004522: 01 d6                       	addl	%edx, %esi
+100004524: 8d 48 05                    	leal	5(%rax), %ecx
+100004527: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+10000452a: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+10000452f: 31 f6                       	xorl	%esi, %esi
+100004531: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+100004536: 01 d6                       	addl	%edx, %esi
+100004538: 8d 48 06                    	leal	6(%rax), %ecx
+10000453b: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+10000453e: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+100004543: 31 f6                       	xorl	%esi, %esi
+100004545: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+10000454a: 01 d6                       	addl	%edx, %esi
+10000454c: 8d 48 07                    	leal	7(%rax), %ecx
+10000454f: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+100004552: 41 83 f9 09                 	cmpl	$9, %r9d
+100004556: 0f 82 ce 00 00 00           	jb	206 <_zip+0x18a>
+10000455c: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+100004561: 31 f6                       	xorl	%esi, %esi
+100004563: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+100004568: 01 d6                       	addl	%edx, %esi
+10000456a: 8d 48 08                    	leal	8(%rax), %ecx
+10000456d: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+100004570: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+100004575: 31 f6                       	xorl	%esi, %esi
+100004577: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+10000457c: 01 d6                       	addl	%edx, %esi
+10000457e: 8d 48 09                    	leal	9(%rax), %ecx
+100004581: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+100004584: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+100004589: 31 f6                       	xorl	%esi, %esi
+10000458b: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+100004590: 01 d6                       	addl	%edx, %esi
+100004592: 8d 48 0a                    	leal	10(%rax), %ecx
+100004595: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+100004598: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+10000459d: 31 f6                       	xorl	%esi, %esi
+10000459f: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+1000045a4: 01 d6                       	addl	%edx, %esi
+1000045a6: 8d 48 0b                    	leal	11(%rax), %ecx
+1000045a9: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+1000045ac: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+1000045b1: 31 f6                       	xorl	%esi, %esi
+1000045b3: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+1000045b8: 01 d6                       	addl	%edx, %esi
+1000045ba: 8d 48 0c                    	leal	12(%rax), %ecx
+1000045bd: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+1000045c0: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+1000045c5: 31 f6                       	xorl	%esi, %esi
+1000045c7: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+1000045cc: 01 d6                       	addl	%edx, %esi
+1000045ce: 8d 48 0d                    	leal	13(%rax), %ecx
+1000045d1: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+1000045d4: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+1000045d9: 31 f6                       	xorl	%esi, %esi
+1000045db: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+1000045e0: 01 d6                       	addl	%edx, %esi
+1000045e2: 8d 48 0e                    	leal	14(%rax), %ecx
+1000045e5: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+1000045e8: c4 c2 a8 f3 ca              	blsrq	%r10, %r10
+1000045ed: 31 f6                       	xorl	%esi, %esi
+1000045ef: f3 49 0f bc f2              	tzcntq	%r10, %rsi
+1000045f4: 01 d6                       	addl	%edx, %esi
+1000045f6: 8d 48 0f                    	leal	15(%rax), %ecx
+1000045f9: 89 34 8f                    	movl	%esi, (%rdi,%rcx,4)
+1000045fc: 41 83 f9 11                 	cmpl	$17, %r9d
+100004600: 72 28                       	jb	40 <_zip+0x18a>
+100004602: c4 c2 f0 f3 ca              	blsrq	%r10, %rcx
+100004607: 83 c0 10                    	addl	$16, %eax
+10000460a: 66 0f 1f 44 00 00           	nopw	(%rax,%rax)
+100004610: 45 31 c9                    	xorl	%r9d, %r9d
+100004613: f3 4c 0f bc c9              	tzcntq	%rcx, %r9
+100004618: 41 01 d1                    	addl	%edx, %r9d
+10000461b: 89 c6                       	movl	%eax, %esi
+10000461d: 44 89 0c b7                 	movl	%r9d, (%rdi,%rsi,4)
+100004621: ff c0                       	incl	%eax
+100004623: c4 e2 f0 f3 c9              	blsrq	%rcx, %rcx
+100004628: 75 e6                       	jne	-26 <_zip+0x170>
+10000462a: 44 89 c0                    	movl	%r8d, %eax
+10000462d: 5d                          	popq	%rbp
+10000462e: c3                          	retq
+10000462f: 90                          	nop

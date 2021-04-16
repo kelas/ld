@@ -8,8 +8,18 @@ Zin U fqm(span x,U*in_q){U qbts=cmi(x,'"');U m=vmull(-1ULL,qbts);R SHR(m);} //no
 Zin U cmi(span z,G m){vec b=vset1(m);U x=(UI)mmask(cmpeq(b,z.l)),y=mmask(cmpeq(b,z.h));R(y<<32)|x;}
 Zin U fqm(span x,U*in_q){U qbts=cmi(x,'"');U m=vmull(aV(qbts,0),aV(-1ULL),0)[0];R SHR(m);}
 #endif
+#define never_inline __declspec(noinline)
 #define z(i) p[ba+i]=idx+_(ctzll)(b),b=b&(b-1);
-Zin UI zip(UI*p,UI ba,UI idx,U b){P(!b,ba)UI n=_(popcountll)(b),nxb=ba+n;N(8,z(i))Z(n>8,N(8,z(i+8)));Z(n>16,ba+=16;do{z(0)ba++;}W(b));R nxb;}
+static never_inline UI zip(UI*p,UI ba,UI idx,U b){
+ P(!b,ba)UI n=_(popcountll)(b),nxb=ba+n;
+#ifndef UNROLL
+ N(8,z(i))
+ Z(n>8,N(8,z(i+8)));
+#else
+ z(0)z(1)z(2)z(3)z(4)z(5)z(6)z(7)                // unroll #1
+ Z(n>8,z(8)z(9)z(10)z(11)z(12)z(13)z(14)z(15));  // unroll #2
+#endif
+ Z(n>16,ba+=16;do{z(0)ba++;}W(b));R nxb;}
 #define mask(dest) qt_mask=r->quo?fqm(in,&in_qt):0,sep=cmi(in,r->sep),trm=cmi(in,'\n');dest=(trm|sep)&~qt_mask;
 #define BN 8 //optional, extra code for better pipelining
 U ld(const S s,U len,CSV*r){span in;U intl_idx,sep,trm,qt_mask,f_sep,idx=0,base=0,in_qt=0;UI*base_ptr=r->i;len-=len<64?0:64;
