@@ -25,7 +25,7 @@ all: $T *.c *.h
 	@#./$o -d -i1 -m1 q.csv  # validate quotes (vect)
 	@#./$o -d -i1 -m2 q.csv  # validate quotes (naive)
 
-test:
+test: *.c *.h
 	@./$o -d -i1 -m1 q.csv  # validate quotes (vect)
 	@./$o -d -i1 -m2 q.csv  # validate quotes (naive)
 
