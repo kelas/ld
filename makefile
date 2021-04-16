@@ -30,12 +30,12 @@ test: *.c *.h
 	@./$o -d -i1 -m2 q.csv  # validate quotes (naive)
 
 unroll:
-	$C -g *.c -o$o -DUNROLL
+	$C -g *.c -o$o -DUNROLL -DNOINLINE
 	objdump --disassemble-functions=_zip $o > zip.UNROLL
 	./$o -vi10 -m0 $T
 
 nounroll:
-	$C  -g *.c -o$o -UUNROLL
+	$C  -g *.c -o$o -UUNROLL -DNOINLINE
 	objdump --disassemble-functions=_zip $o > zip.NOUNROLL
 	./$o -vi10 -m0 $T
 

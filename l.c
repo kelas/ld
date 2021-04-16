@@ -8,9 +8,8 @@ Zin U fqm(span x,U*in_q){U qbts=cmi(x,'"');U m=vmull(-1ULL,qbts);R SHR(m);} //no
 Zin U cmi(span z,G m){vec b=vset1(m);U x=(UI)mmask(cmpeq(b,z.l)),y=mmask(cmpeq(b,z.h));R(y<<32)|x;}
 Zin U fqm(span x,U*in_q){U qbts=cmi(x,'"');U m=vmull(aV(qbts,0),aV(-1ULL),0)[0];R SHR(m);}
 #endif
-#define never_inline __declspec(noinline)
 #define z(i) p[ba+i]=idx+_(ctzll)(b),b=b&(b-1);
-static never_inline UI zip(UI*p,UI ba,UI idx,U b){
+ZZZ UI zip(UI*p,UI ba,UI idx,U b){
  P(!b,ba)UI n=_(popcountll)(b),nxb=ba+n;
 #ifndef UNROLL
  N(8,z(i))

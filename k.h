@@ -20,4 +20,10 @@ typedef unsigned long long U;typedef unsigned char G,*S,VA V;typedef int I;typed
 
 #define IN(l,x,r)         ((l)<=(x)&&(x)<=(r))
 
+#ifndef NOINLINE
+#define ZZZ Zin
+#else
+#define ZZZ static inline __attribute__((noinline, unused))
+#endif
+
 //:~
