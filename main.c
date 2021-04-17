@@ -62,9 +62,9 @@ int main(int argc,char*argv[]) {
 #endif // __linux__
 
       if(2>mode)
-        ld((const unsigned char *)p, pn, &pcsv);
+        ld((unsigned char *)p, pn, &pcsv);
       else
-        ld_naive((const unsigned char *)p, pn, &pcsv);
+        ld_naive((unsigned char *)p, pn, &pcsv);
       //pcsv.indexes[pcsv.n++]=pn;  //clamp
 
 #ifdef __linux__
@@ -87,7 +87,7 @@ int main(int argc,char*argv[]) {
 
       if(!((ctr)%5)){
         if(2>mode){
-          if(parse_number((const char*)p+pcsv.i[i]+1,&t)){sum+=t;} //lemire's fast_double_parser
+          if(parse_number((char*)p+pcsv.i[i]+1,&t)){sum+=t;} //lemire's fast_double_parser
         }else
           sum+=strtod(p+pcsv.i[i]+1,0); // stock strtoad
       }

@@ -1,17 +1,17 @@
-ifneq ($(shell uname -m),aarch64)
+ifneq ($(shell uname -m),arm64)
  A=-march=native
+else
+ A=-march=armv8-a+crc+crypto
 endif
 
 CC=clang
-#CC=/usr/local/Cellar/gcc/10.2.0_4/bin/gcc-10
+#CC=gcc-10
 
 o=l
 T=taq100m.csv
 O=-O3 $A
 F=-fno-common -fno-stack-protector -fno-asynchronous-unwind-tables
-N=-Wno-unused-function -Wno-unused-value -Wno-unused-variable \
-	-Wno-unused-command-line-argument -Wno-discarded-qualifiers -Wno-unknown-warning-option
-W=-Wall -Werror -Wno-incompatible-pointer-types -Wno-pointer-sign $N
+W=-Wall -Werror -Wno-incompatible-pointer-types -Wno-pointer-sign -Wno-unused-function
 C=$(CC) $O $W $F
 
 #U=`uname -rsm`
